@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import ProductsDashboard from './ProductsDashboard';
 
 class Shop extends Component {
   render() {
     return (
       <div id="app">
-        <h1>Welcome!</h1>
+        <ProductsDashboard />
       </div>
     );
   }
