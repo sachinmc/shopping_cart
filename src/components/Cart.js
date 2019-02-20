@@ -1,7 +1,7 @@
 import React from  'react';
 
 export default class Cart extends React.Component {
-  cartEmpty = () => ( 
+  cartEmpty = () => (
     <div className="cart">
       <h2>Your Cart</h2>
       <p>Your cart is empty</p>
@@ -16,7 +16,7 @@ export default class Cart extends React.Component {
       total += item.price*item.quantity
     ))
 
-    return total;
+    return total.toFixed(2);
   };
 
   handleCheckout = (evt) => {
@@ -29,17 +29,17 @@ export default class Cart extends React.Component {
     if (this.props.cart.length === 0) {
       return this.cartEmpty();
     } else {
-      console.log(this.props.cart);
+      // console.log(this.props.cart);
       return (
         <div className="cart">
           <h2>Your Cart</h2>
           <table className="cart-items"><thead><tr><th>Item</th><th>Quantity</th><th>Price</th></tr></thead><tbody>
           {this.props.cart.map( (product) => (
-            <tr>
+            <tr key={product.id}>
               <td>{product.title}</td>
               <td>{product.quantity}</td>
               <td>{product.price}</td>
-            </tr>         
+            </tr>
           ))}
           </tbody></table>
           <p>Total: ${this.cartTotal()}</p>

@@ -28,13 +28,14 @@ export default class Product extends React.Component {
             toggleEditState={this.toggleEditState}
           />
           <a className="delete-button"><span>X</span></a>
-        </div> 
+        </div>
         {this.state.editing ? <Form id={id}
-                                    title={title} 
-                                    quantity={quantity} 
+                                    title={title}
+                                    quantity={quantity}
                                     price={price}
                                     onFormSubmit={this.props.handleFormSubmit}
                                     toggleEditState={this.toggleEditState}
+                                    submitText="Update"
                               /> : ''}
       </div>
     );

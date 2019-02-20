@@ -25,7 +25,10 @@ export default class ToggleableForm extends React.Component {
 	render () {
 		if (this.state.formOpen) {
 			return (
-				<Form onFormSubmit={this.handleFormSubmit}/>
+				<Form
+					onFormSubmit={this.handleFormSubmit}
+					submitText="Add"
+				/>
     	)
   	} else {
 			return (
