@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import ProductAction from './ProductAction';
 import Form from './Form';
 
@@ -29,6 +30,11 @@ export default class Product extends React.Component {
           />
           <a className="delete-button"><span>X</span></a>
         </div>
+        <p></p>
+
+        <Link to={`/products/${id}`} className="button">Show Product</Link>
+
+
         {this.state.editing ? <Form id={id}
                                     title={title}
                                     quantity={quantity}

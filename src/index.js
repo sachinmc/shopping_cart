@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Shop from './components/Shop';
+import {BrowserRouter as Router} from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Shop />, document.getElementById('root'));
+ReactDOM.render(
+  <Router>
+    <Shop />
+  </Router>, 
+  document.getElementById('root')
+);
 registerServiceWorker();
 
 /*
