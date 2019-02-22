@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import ProductAction from './ProductAction';
 import Form from './Form';
 
@@ -28,13 +29,19 @@ export default class Product extends React.Component {
             toggleEditState={this.toggleEditState}
           />
           <a className="delete-button"><span>X</span></a>
-        </div> 
+        </div>
+        <p></p>
+
+        <Link to={`/products/${id}`} className="button">Show Product</Link>
+
+
         {this.state.editing ? <Form id={id}
-                                    title={title} 
-                                    quantity={quantity} 
+                                    title={title}
+                                    quantity={quantity}
                                     price={price}
                                     onFormSubmit={this.props.handleFormSubmit}
                                     toggleEditState={this.toggleEditState}
+                                    submitText="Update"
                               /> : ''}
       </div>
     );
