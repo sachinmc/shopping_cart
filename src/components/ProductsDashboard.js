@@ -1,9 +1,12 @@
 import React from 'react';
-import data from '../lib/data';
 import {Route, Switch} from 'react-router-dom';
 import ProductsList from './ProductsList';
 import Cart from './Cart';
 import ToggleableForm from './ToggleableForm';
+import store from '../store.js';
+import data from '../lib/data';
+
+
 
 export default class ProductsDashboard extends React.Component {
   state = {
@@ -11,14 +14,11 @@ export default class ProductsDashboard extends React.Component {
     cart: []
   }
 
-  handleAddFormSubmit = (newProduct) => {
-    newProduct.quantity = Number(newProduct.quantity);
-    newProduct.price = Number(newProduct.price);
-
-    this.setState({
-      productData: [...this.state.productData, newProduct]
-    })
+  componentDidMount = () => {
+    store.dispatch({ type: 'PRODUCTS_RECEIVED', productData: data, });
+    store.subscribe(() => ( this.forceUpdate() ));
   }
+
 
   handleEditFormSubmit = (updatedProduct) => {
     let updatedProducts = this.state.productData.map((item) => {
@@ -39,46 +39,9 @@ export default class ProductsDashboard extends React.Component {
   }
 
   handleCheckoutClick = () => {
-    this.setState({
-      cart: [],
-    })
+    store.dispatch({ type: 'HANDLE_CHECKOUT' });
   }
 
-  addProductToCart = (id) => {
-    let new_data = this.state.productData.map((item) => {
-      if (item.id === id) {
-        return Object.assign({}, item, {
-          quantity: item.quantity - 1,
-        });
-      }
-      return item;
-    });
-    this.setState({
-      productData: new_data
-    });
-
-    if (this.state.cart.find( (product) => id === product.id)) {
-      let new_cart = this.state.cart.map((item) => {
-        if (item.id === id) {
-          return Object.assign({}, item, {
-            quantity: item.quantity + 1,
-          })
-        }
-        return item;
-      });
-
-      this.setState({
-        cart: new_cart
-      });
-    } else {
-      let new_item = Object.assign({}, this.state.productData.find( (product) => id === product.id));
-      new_item.quantity = 1;
-
-      this.setState({
-        cart: [...this.state.cart, new_item]
-      });
-    }
-  };
 
   render() {
 
@@ -95,7 +58,7 @@ export default class ProductsDashboard extends React.Component {
 
                 <main>
                   <ProductsList
-                    products= {this.state.productData}
+                    products= {store.getState().productData}
                     addProductToCart={this.addProductToCart}
                     handleEditFormSubmit={this.handleEditFormSubmit}
                   />

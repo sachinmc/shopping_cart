@@ -1,4 +1,6 @@
 import React from  'react';
+import store from '../store.js';
+
 
 export default class Cart extends React.Component {
   cartEmpty = () => (
@@ -12,7 +14,7 @@ export default class Cart extends React.Component {
 
   cartTotal = () => {
     let total = 0;
-    this.props.cart.forEach((item) => (
+    store.getState().cart.forEach((item) => (
       total += item.price*item.quantity
     ))
 
@@ -26,7 +28,7 @@ export default class Cart extends React.Component {
   }
 
   render() {
-    if (this.props.cart.length === 0) {
+    if (store.getState().length === 0) {
       return this.cartEmpty();
     } else {
       // console.log(this.props.cart);
@@ -34,7 +36,7 @@ export default class Cart extends React.Component {
         <div className="cart">
           <h2>Your Cart</h2>
           <table className="cart-items"><thead><tr><th>Item</th><th>Quantity</th><th>Price</th></tr></thead><tbody>
-          {this.props.cart.map( (product) => (
+          {store.getState().cart.map( (product) => (
             <tr key={product.id}>
               <td>{product.title}</td>
               <td>{product.quantity}</td>

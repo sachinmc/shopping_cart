@@ -1,9 +1,16 @@
 import React from 'react';
+import store from '../store.js';
 
 export default class ProductAction extends React.Component {
-  handleAddToCart = () => {
-    this.props.addProductToCart(this.props.id);
-  }
+
+   addProductToCart = (evt) => {
+    store.dispatch({ type: 'ADD_TO_CART', 
+    								 item: { id: this.props.id, 
+    								 				 title: this.props.title, 
+    								 				 quantity: this.props.quantity, 
+    								 				 price: this.props.price } 
+    								 			 });
+  };
 
   outOfStock = () => (
     <div className="actions product-actions">
@@ -29,7 +36,7 @@ export default class ProductAction extends React.Component {
       return (
         <div className="actions product-actions">
           <a className="button add-to-cart"
-             onClick={this.handleAddToCart}
+             onClick={this.addProductToCart}
           >
             Add to Cart
           </a>

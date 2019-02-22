@@ -1,5 +1,7 @@
 import React from 'react';
 import Form from './Form';
+import store from '../store.js';
+
 
 export default class ToggleableForm extends React.Component {
 	state = {
@@ -14,8 +16,13 @@ export default class ToggleableForm extends React.Component {
 		})
 	}
 
+
 	handleFormSubmit = (newProduct) => {
-		this.props.onFormSubmit(newProduct);
+		newProduct.quantity = Number(newProduct.quantity);
+    newProduct.price = Number(newProduct.price);
+
+    store.dispatch({ type: 'ADD_NEW_PRODUCT', item: newProduct})
+
 
 		this.setState({
 			formOpen: false,

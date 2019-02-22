@@ -1,8 +1,14 @@
 import React from 'react';
+import store from '../store.js';
+
+
+function generateId() {
+	return Math.random() * 1000;
+}
 
 export default class Form extends React.Component {
 	state = {
-		id: this.props.id,
+		id: this.props.id || generateId(),
 		title: this.props.title || '',
 		price: this.props.price || '',
 		quantity: this.props.quantity || '',
@@ -24,7 +30,7 @@ export default class Form extends React.Component {
 
 		this.props.toggleEditState && this.props.toggleEditState();
 
-		this.props.onFormSubmit(product);
+		store.dispatch({ type: 'EDIT_PRODUCT', item: product });
 
 		this.setState({
 			title: '',

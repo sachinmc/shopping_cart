@@ -24,6 +24,8 @@ export default class Product extends React.Component {
           <p className="quantity">{quantity} left in stock</p>
           <ProductAction
             id={id}
+            title={title}
+            price={price}
             quantity={quantity}
             addProductToCart={this.props.addProductToCart}
             toggleEditState={this.toggleEditState}
