@@ -19,26 +19,23 @@ export default class ProductsDashboard extends React.Component {
     })
   }
 
-    handleEditFormSubmit = (updatedProduct) => {
-      console.log(updatedProduct);
+  handleEditFormSubmit = (updatedProduct) => {
+    let updatedProducts = this.state.productData.map((item) => {
 
-      let updatedProducts = this.state.productData.map((item) => {
-
-      if (item.id === updatedProduct.id) {
-        return Object.assign({}, item, {
-          quantity: updatedProduct.quantity,
-          title: updatedProduct.title,
-          price: updatedProduct.price,
-        });
-      }
-        return item;
+    if (item.id === updatedProduct.id) {
+      return Object.assign({}, item, {
+        quantity: updatedProduct.quantity,
+        title: updatedProduct.title,
+        price: updatedProduct.price,
       });
-
-      console.log(updatedProducts);
-      this.setState({
-        productData: updatedProducts
-      })
     }
+      return item;
+    });
+
+    this.setState({
+      productData: updatedProducts
+    })
+  }
 
   handleCheckoutClick = () => {
     this.setState({
