@@ -4,7 +4,6 @@ import {Route, Switch} from 'react-router-dom';
 import ProductsList from './ProductsList';
 import Cart from './Cart';
 import ToggleableForm from './ToggleableForm';
-import Product from './Product';
 
 export default class ProductsDashboard extends React.Component {
   state = {
@@ -118,7 +117,6 @@ export default class ProductsDashboard extends React.Component {
             let product = this.state.productData.find((item) => item.id === Number(id));
 
             if (product) {
-              console.log(product);
               return (
                 <div className="product">
                   <div className="product-details">
